@@ -8,7 +8,7 @@ public class Impressora_de_Nota_Fiscal {
 
     public Impressora_de_Nota_Fiscal() {}
 
-    public static void imprimeNotas(Usuario usuario,String moeda){
+    public static void imprimeNotas(Usuario usuario,Moeda moeda){
 
         System.out.println(cabecalho(usuario));
 
@@ -18,19 +18,14 @@ public class Impressora_de_Nota_Fiscal {
             valorTotal += p.getQtd()*p.getPreco();
         }
         valorTotal = calculaDesconto(valorTotal);
-        System.out.println("TOTAL: "+moeda+" "+valorTotal);
-        System.out.println(verificaTaxas(moeda));
+        System.out.println("TOTAL: "+moeda.name()+" "+valorTotal);
+        System.out.println(moeda.getDescricao() + ": " + moeda.getTaxa());
     }
 
     public static double calculaDesconto(double valor){
         if (valor > 500){return valor -= 25;} else{return valor;}
     }
 
-    public static String verificaTaxas(String moeda){
-        if ("USD".equals(moeda)){return ("Taxa adicional: 5.0");}
-        if ("BRL".equals(moeda)) {return ("IOF: 7.3");}
-        return "Sem taxa";
-    }
     public static String cabecalho(Usuario usuario){
         return ("== NOTA FISCAL == \n ID: "+usuario.getID()+" / Cliente: "+usuario.getNome());
     }
@@ -46,7 +41,7 @@ public class Impressora_de_Nota_Fiscal {
         listaProduto.add(p2);
 
         Usuario user1 = new Usuario(listaProduto,"Maria","INV-1");
-        imprimeNotas(user1,"BRL");
+        imprimeNotas(user1,Moeda.BRL);
 
     }
 

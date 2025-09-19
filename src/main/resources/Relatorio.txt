@@ -1,0 +1,19 @@
+Relatório de refatorações no código:
+
+Large Method: antes o método imprimirNota estava fazendo várias tarefas:
+imprimir a nota fiscal, calcular o total, aplicar descontos e taxas, e mais. Agora O código foi
+refatorado para separar as responsabilidades. A impressão da nota fiscal está em imprimeNotas,
+a lógica de desconto está em calculaDesconto, e a verificação de taxas está em verificaTaxas.
+Isso melhora a coesão do código.
+
+Classe Aninhada Inadequada: A classe Linha está dentro de Grupo4_InvoicePrinter, mas não tem
+dependência direta com a classe externa. Poderia ser uma classe separada para respeitar coesão.
+
+Primitive Obsession: O uso de String para representar moeda ("BRL", "USD") é frágil, por isso
+optamos Por usar um enum.
+
+Legibilidade: Antes o código tinha muita concatenação de strings em um único bloco, o que
+tornava o código um pouco difícil de ler. Agora a concatenação foi mantida, mas o uso de
+métodos como cabecalho  ajuda a isolar a impressão de informações e melhora a estrutura geral
+do código.O método imprimeNotas agora imprime de forma mais legível.
+
